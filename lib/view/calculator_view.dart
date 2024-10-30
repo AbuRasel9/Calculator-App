@@ -1,6 +1,8 @@
+import 'package:calculator/provider/calculation_provider.dart';
 import 'package:calculator/view/widget/calculation_button.dart';
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'package:provider/provider.dart';
 
 class CalculatorView extends StatefulWidget {
   const CalculatorView({super.key});
@@ -10,7 +12,7 @@ class CalculatorView extends StatefulWidget {
 }
 
 class _CalculatorViewState extends State<CalculatorView> {
-  String equation = "0";
+/*  String equation = "0";
   String result = "0";
   String expression = "";
   double equationFontSize = 38.0;
@@ -69,12 +71,13 @@ class _CalculatorViewState extends State<CalculatorView> {
         }
       }
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
-    print("-------e$equation");
-    print("-------e$result");
+    final provider=Provider.of<CalculationProvider>(context);
+    print("-------e${provider.equation}");
+    print("-------e${provider.result}");
     return Scaffold(
         backgroundColor: Colors.black54,
         appBar: AppBar(
@@ -111,7 +114,7 @@ class _CalculatorViewState extends State<CalculatorView> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          equation,
+                          provider.equation,
                           style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -121,13 +124,14 @@ class _CalculatorViewState extends State<CalculatorView> {
                           width: 10,
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () =>provider.buttonPressed("⌫") ,
                           icon: const Icon(
-                            Icons.more_vert,
+                            Icons.backspace_outlined,
                             color: Colors.orange,
                             size: 23,
                           ),
                         ),
+
                         const SizedBox(
                           width: 10,
                         ),
@@ -144,23 +148,24 @@ class _CalculatorViewState extends State<CalculatorView> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  result,
+                  provider.result,
                   style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                IconButton(
-                  onPressed: () =>buttonPressed("⌫") ,
-                  icon: const Icon(
-                    Icons.backspace_outlined,
-                    color: Colors.orange,
-                    size: 23,
-                  ),
+                      color: Colors.white70),
                 ),
                 const SizedBox(
                   width: 20,
                 ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.more_vert,
+                    color: Colors.orange,
+                    size: 23,
+                  ),
+                ),
+
               ],
             ),
             const SizedBox(
@@ -171,32 +176,32 @@ class _CalculatorViewState extends State<CalculatorView> {
               children: [
 
                 CalculationButton(
-                  onTap: () => buttonPressed(
+                  onTap: () =>provider. buttonPressed(
                     "AC",
                   ),
                   buttonColor: Colors.white10,
                   buttonText: "AC",
                 ),
                 CalculationButton(
-                  onTap: () => buttonPressed(
+                  onTap: () =>provider. buttonPressed(
                     "%",
                   ),
                   buttonColor: Colors.white10,
                   buttonText: "%",
                 ),
                 CalculationButton(
-                  onTap: () => buttonPressed(
+                  onTap: () =>provider. buttonPressed(
                     "÷",
                   ),
                   buttonColor: Colors.white10,
                   buttonText: "÷",
                 ),
                 CalculationButton(
-                  onTap: () => buttonPressed(
-                    "×",
+                  onTap: () => provider.buttonPressed(
+                    "x",
                   ),
                   buttonColor: Colors.white10,
-                  buttonText: "×",
+                  buttonText: "x",
                 )
               ],
             ),
@@ -204,22 +209,22 @@ class _CalculatorViewState extends State<CalculatorView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CalculationButton(
-                  onTap:()=> buttonPressed("7"),
+                  onTap:()=>provider. buttonPressed("7"),
                   buttonColor: Colors.white24,
                   buttonText: "7",
                 ),
                 CalculationButton(
-                  onTap:()=> buttonPressed("8"),
+                  onTap:()=>provider. buttonPressed("8"),
                   buttonColor: Colors.white24,
                   buttonText: "8",
                 ),
                 CalculationButton(
-                  onTap:()=> buttonPressed("9"),
+                  onTap:()=> provider.buttonPressed("9"),
                   buttonColor: Colors.white24,
                   buttonText: "9",
                 ),
                 CalculationButton(
-                  onTap:()=> buttonPressed("-"),
+                  onTap:()=>provider. buttonPressed("-"),
                   buttonColor: Colors.white10,
                   buttonText: "-",
                 )
@@ -229,22 +234,22 @@ class _CalculatorViewState extends State<CalculatorView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CalculationButton(
-                  onTap:()=> buttonPressed("4"),
+                  onTap:()=> provider.buttonPressed("4"),
                   buttonColor: Colors.white24,
                   buttonText: "4",
                 ),
                 CalculationButton(
-                  onTap:()=> buttonPressed("5"),
+                  onTap:()=>provider. buttonPressed("5"),
                   buttonColor: Colors.white24,
                   buttonText: "5",
                 ),
                 CalculationButton(
-                  onTap:()=> buttonPressed("6"),
+                  onTap:()=>provider. buttonPressed("6"),
                   buttonColor: Colors.white24,
                   buttonText: "6",
                 ),
                 CalculationButton(
-                  onTap:()=> buttonPressed("-"),
+                  onTap:()=>provider. buttonPressed("-"),
                   buttonColor: Colors.white10,
                   buttonText: "+",
                 )
@@ -259,17 +264,17 @@ class _CalculatorViewState extends State<CalculatorView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CalculationButton(
-                          onTap:()=> buttonPressed("1"),
+                          onTap:()=>provider. buttonPressed("1"),
                           buttonColor: Colors.white24,
                           buttonText: "1",
                         ),
                         CalculationButton(
-                          onTap:()=> buttonPressed("2"),
+                          onTap:()=>provider. buttonPressed("2"),
                           buttonColor: Colors.white24,
                           buttonText: "2",
                         ),
                         CalculationButton(
-                          onTap:()=> buttonPressed("3"),
+                          onTap:()=>provider. buttonPressed("3"),
                           buttonColor: Colors.white24,
                           buttonText: "3",
                         ),
@@ -279,17 +284,17 @@ class _CalculatorViewState extends State<CalculatorView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CalculationButton(
-                          onTap:()=> buttonPressed("+/-"),
+                          onTap:()=>provider. buttonPressed("+/-"),
                           buttonColor: Colors.white24,
                           buttonText: "+/-",
                         ),
                         CalculationButton(
-                          onTap:()=> buttonPressed("0"),
+                          onTap:()=>provider. buttonPressed("0"),
                           buttonColor: Colors.white24,
                           buttonText: "0",
                         ),
                         CalculationButton(
-                          onTap: ()=>buttonPressed("."),
+                          onTap: ()=>provider.buttonPressed("."),
                           buttonColor: Colors.white24,
                           buttonText: ".",
                         ),
@@ -298,7 +303,7 @@ class _CalculatorViewState extends State<CalculatorView> {
                   ],
                 ),
                 CalculationButton(
-                  onTap:()=> buttonPressed("="),
+                  onTap:()=>provider. buttonPressed("="),
                   buttonColor: Colors.orange,
                   buttonText: "=",
                 ),

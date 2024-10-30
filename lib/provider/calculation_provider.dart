@@ -13,6 +13,7 @@ class CalculationProvider extends ChangeNotifier {
   String get expression => _expression;
 
    buttonPressed(String buttonText) {
+     print("-----$buttonText");
      String doesContainDecimal(dynamic result) {
       if (result.toString().contains(".")) {
         List<String> splitDecimal = result.toString().split(".");
@@ -25,7 +26,10 @@ class CalculationProvider extends ChangeNotifier {
       return result;
     }
 
-    if (buttonText == "Ac") {
+    if (buttonText == "AC") {
+      print("--ff---$buttonText");
+
+
       _equation = "0";
       _result = "0";
       notifyListeners();
